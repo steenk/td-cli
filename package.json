@@ -1,0 +1,30 @@
+{
+  "name": "td-cli",
+  "version": "1.0.0",
+  "description": "Command-line scaffolding and development server for Tripledollar projects",
+  "type": "module",
+  "bin": {
+    "td": "./bin/td.js"
+  },
+  "files": [
+    "bin",
+    "src",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18.3"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.js"
+  },
+  "keywords": [
+    "tripledollar",
+    "cli",
+    "dom-scripting",
+    "rollup",
+    "dev-server"
+  ],
+  "author": "Steen Klingberg",
+  "license": "MIT"
+}
