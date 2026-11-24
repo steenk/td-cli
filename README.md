@@ -1,11 +1,11 @@
-# td-cli
+# tripledollar-cli
 
-Zero-dependency command-line scaffolding tool and static HTTP development server for **[Tripledollar v2](https://tripledollar.net)** ([GitHub](https://github.com/steenk/tripledollar)) projects.
+Zero-dependency command-line scaffolding tool (`td`) and static HTTP development server for **[Tripledollar v2](https://tripledollar.net)** ([GitHub](https://github.com/steenk/tripledollar)) projects.
 
 ## Installation
 
 ```sh
-npm install -g td-cli
+npm install -g tripledollar-cli
 ```
 
 Or link locally during development:

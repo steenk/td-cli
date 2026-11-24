@@ -8,7 +8,7 @@ import { startServer, killServer, getServerStatus, openBrowser } from '../src/co
 const pkg = JSON.parse(fs.readFileSync(new URL('../package.json', import.meta.url), 'utf8'));
 
 function printHelp() {
-  console.log(`td-cli v${pkg.version} - CLI & dev server for Tripledollar projects
+  console.log(`tripledollar-cli v${pkg.version} - CLI & dev server for Tripledollar projects
 
 Usage: td [options] [path]
 
@@ -22,7 +22,7 @@ Options:
   -o, --open           Open the browser (optionally pass a subpath)
   -p, --port <port>    Server port (default: $TD_PORT or 3000)
   -q, --public         Listen on 0.0.0.0 instead of 127.0.0.1
-  -v, --version        Show td-cli version
+  -v, --version        Show tripledollar-cli version
   -h, --help           Show this help text`);
 }
 

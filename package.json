@@ -1,10 +1,10 @@
 {
-  "name": "td-cli",
+  "name": "tripledollar-cli",
   "version": "1.0.0",
   "description": "Command-line scaffolding and development server for Tripledollar projects",
   "type": "module",
   "bin": {
-    "td": "./bin/td.js"
+    "td": "bin/td.js"
   },
   "files": [
     "bin",
@@ -18,7 +18,7 @@
   "homepage": "https://tripledollar.net",
   "repository": {
     "type": "git",
-    "url": "https://github.com/steenk/td-cli.git"
+    "url": "git+https://github.com/steenk/td-cli.git"
   },
   "bugs": {
     "url": "https://github.com/steenk/td-cli/issues"
