@@ -1,6 +1,6 @@
 # td-cli
 
-Zero-dependency command-line scaffolding tool and static HTTP development server for **Tripledollar v2** projects.
+Zero-dependency command-line scaffolding tool and static HTTP development server for **[Tripledollar v2](https://tripledollar.net)** ([GitHub](https://github.com/steenk/tripledollar)) projects.
 
 ## Installation
 
