@@ -1,3 +1,11 @@
+import fs from 'node:fs';
+
+const AGENTS_MD_PATH = new URL('../AGENTS.md', import.meta.url);
+
+export function agentsMd() {
+  return fs.readFileSync(AGENTS_MD_PATH, 'utf8');
+}
+
 export function indexHtml(name) {
   return `<!doctype html>
 <html lang="en">
@@ -74,13 +82,15 @@ export default {
 export function mainJs(name) {
   return `import $$$ from 'tripledollar';
 import './main.css';
-import demo from './components/td-demo/index.js';
+import { createDemo } from './components/td-demo/index.js';
+
+const demo = createDemo();
 
 $$$.appendToDoc([
-  'div.center',
+  'main.center',
   ['h1.tripledollar', ${JSON.stringify(name)}],
   ['p.version', 'Tripledollar v', $$$.version],
-  demo()
+  demo
 ]).then(() => {
   demo.add('Build fast, compact web applications with just JavaScript.');
 });
@@ -119,37 +129,49 @@ export function demoComponentJs() {
   return `import $$$ from 'tripledollar';
 import './style.css';
 
-function render() {
-  return $$$([
-    'div.td-demo',
+export function createDemo() {
+  let clicks = 0;
+  const controller = new AbortController();
+  const { signal } = controller;
+
+  const notes = $$$('div.notes');
+  const button = $$$('button.td-btn', { type: 'button' }, 'Click me').evt(
+    'click',
+    (e) => {
+      clicks += 1;
+      e.currentTarget.textContent = \`Clicked \${clicks} \${clicks === 1 ? 'time' : 'times'}\`;
+      root.dispatchEvent(new CustomEvent('demo-click', { detail: { clicks }, bubbles: true }));
+    },
+    { signal }
+  );
+
+  const root = $$$(
+    'section.td-demo',
     ['h2', 'Just DOM scripting'],
     [
       'pre',
 \`import $$$ from 'tripledollar';
 
-await $$$.appendToDoc(['div',
+$$$.appendToDoc(['div',
   ['h1', 'Tripledollar'],
   ['p', 'Version ', $$$.version]
 ]);\`
     ],
-    $$$('button.td-btn', { type: 'button' }, 'Click me').evt(
-      'click',
-      (e) => {
-        e.currentTarget.textContent = 'Clicked!';
-      },
-      { once: true }
-    )
-  ]);
+    button,
+    notes
+  )
+    .set('add', (note) => {
+      notes.ins(['p.note', note]);
+    })
+    .set('destroy', () => {
+      controller.abort();
+      $$$.destroy(root, true);
+    });
+
+  return root;
 }
 
-render.add = function (note) {
-  const demo = document.querySelector('.td-demo');
-  if (demo) {
-    $$$(demo).ins(['p.note', note]);
-  }
-};
-
-export default render;
+export default createDemo;
 `;
 }
 
@@ -175,6 +197,11 @@ export function demoComponentCss() {
     background: #1f2023;
     color: gold;
     cursor: pointer;
+  }
+
+  & .note {
+    margin: 12px 0 0;
+    opacity: 0.9;
   }
 }
 `;

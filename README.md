@@ -44,6 +44,8 @@ npm run build
 npm run start
 ```
 
+`td --init` also generates an [`AGENTS.md`](AGENTS.md) file in your project root describing the core principles and patterns of Tripledollar v2 DOM scripting so AI coding assistants produce idiomatic code out of the box.
+
 ### Testing with a local `tripledollar` checkout (`npm link`)
 
 ```sh

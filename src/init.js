@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import {
+  agentsMd,
   indexHtml,
   packageJson,
   rollupConfig,
@@ -12,6 +13,7 @@ import {
 } from './templates.js';
 
 const CONFLICT_FILES = [
+  'AGENTS.md',
   'package.json',
   'rollup.config.js',
   'src/main.js',
@@ -37,6 +39,7 @@ export function initProject({ cwd = process.cwd(), name = 'Tripledollar', includ
   }
 
   const files = [
+    ['AGENTS.md', agentsMd()],
     ['package.json', packageJson(name)],
     ['rollup.config.js', rollupConfig()],
     ['dist/index.html', indexHtml(name)],

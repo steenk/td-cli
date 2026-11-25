@@ -9,6 +9,7 @@
   "files": [
     "bin",
     "src",
+    "AGENTS.md",
     "README.md",
     "LICENSE"
   ],

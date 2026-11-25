@@ -58,12 +58,20 @@ describe('td-cli', () => {
     const dir = makeTempDir();
     runCli(['--init', '--name', 'Demo App'], dir);
 
+    assert.equal(fs.existsSync(path.join(dir, 'AGENTS.md')), true);
     assert.equal(fs.existsSync(path.join(dir, 'package.json')), true);
     assert.equal(fs.existsSync(path.join(dir, 'rollup.config.js')), true);
     assert.equal(fs.existsSync(path.join(dir, 'dist/index.html')), true);
     assert.equal(fs.existsSync(path.join(dir, 'src/main.js')), true);
     assert.equal(fs.existsSync(path.join(dir, 'src/components/td-demo/index.js')), true);
     assert.equal(fs.existsSync(path.join(dir, 'server.js')), false);
+
+    const expectedAgents = fs.readFileSync(new URL('../AGENTS.md', import.meta.url), 'utf8');
+    assert.equal(fs.readFileSync(path.join(dir, 'AGENTS.md'), 'utf8'), expectedAgents);
+
+    const demoSrc = fs.readFileSync(path.join(dir, 'src/components/td-demo/index.js'), 'utf8');
+    assert.match(demoSrc, /export function createDemo/);
+    assert.match(demoSrc, /AbortController/);
 
     const pkg = JSON.parse(fs.readFileSync(path.join(dir, 'package.json'), 'utf8'));
     assert.equal(pkg.name, 'demo-app');
