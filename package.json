@@ -1,6 +1,6 @@
 {
   "name": "tripledollar-cli",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Command-line scaffolding and development server for Tripledollar projects",
   "type": "module",
   "bin": {
